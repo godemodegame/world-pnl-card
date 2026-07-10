@@ -224,15 +224,12 @@ body {
 
 .planet-art {
   position: absolute;
-  width: 182%;
-  height: 182%;
-  left: -41%;
-  top: -41%;
+  width: 166%;
+  height: 166%;
+  left: -33%;
+  top: -33%;
   max-width: none;
   object-fit: contain;
-  mix-blend-mode: screen;
-  -webkit-mask-image: radial-gradient(circle, #000 0 38%, transparent 52%);
-  mask-image: radial-gradient(circle, #000 0 38%, transparent 52%);
   pointer-events: none;
   user-select: none;
 }
@@ -242,9 +239,21 @@ body {
   aspect-ratio: 1;
 }
 
+.planet--large .planet-art {
+  filter:
+    drop-shadow(-18px 26px 27px rgba(0, 204, 230, 0.48))
+    drop-shadow(0 0 9px rgba(177, 243, 255, 0.2));
+}
+
 .planet--small {
   width: clamp(67px, 5.5vw, 82px);
   aspect-ratio: 1;
+}
+
+.planet--small .planet-art {
+  filter:
+    drop-shadow(-5px 8px 8px rgba(0, 211, 235, 0.62))
+    drop-shadow(0 0 3px rgba(190, 247, 255, 0.25));
 }
 
 .status-pill {
