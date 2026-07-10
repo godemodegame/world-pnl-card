@@ -4,7 +4,7 @@ function Planet({ small = false }: { small?: boolean }) {
       className={small ? "planet planet--small" : "planet planet--large"}
       aria-hidden="true"
     >
-      <img className="planet-art" src="/world-planet.png" alt="" />
+      <img className="planet-art" src="/world-planet-hq.png" alt="" />
     </span>
   );
 }
