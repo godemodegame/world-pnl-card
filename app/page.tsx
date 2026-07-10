@@ -26,7 +26,9 @@ export default function Home() {
             <p className="eyebrow">Result</p>
             <div className="result-line">
               <strong>Yes</strong>
-              <span className="check" aria-label="Resolved successfully">✓</span>
+              <span className="check" aria-label="Resolved successfully">
+                <img className="check-icon" src="/checkmark-badge.png" alt="" />
+              </span>
             </div>
             <p className="muted">Market resolved</p>
           </div>

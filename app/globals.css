@@ -151,12 +151,13 @@ body {
   display: grid;
   place-items: center;
   flex: 0 0 auto;
-  border-radius: 50%;
-  background: rgba(13, 65, 39, 0.76);
-  color: var(--green);
-  font-size: 39px;
-  font-weight: 440;
-  line-height: 1;
+}
+
+.check-icon {
+  width: 135%;
+  height: 135%;
+  max-width: none;
+  object-fit: contain;
 }
 
 .muted {
@@ -346,7 +347,6 @@ body {
   .check {
     width: 56px;
     height: 56px;
-    font-size: 32px;
   }
 
   .muted {
