@@ -209,88 +209,41 @@ body {
   position: absolute;
   width: 48%;
   height: 74%;
-  top: 4.8%;
-  right: 3.35%;
+  top: 4.1%;
+  right: 2.8%;
   display: grid;
   place-items: center;
 }
 
-.orb {
+.planet {
   position: relative;
-  border-radius: 48% 52% 50% 50%;
-  overflow: hidden;
-  transform: rotate(9deg);
-  background:
-    radial-gradient(circle at 50% 20%, rgba(255, 255, 220, 0.98), transparent 28%),
-    radial-gradient(circle at 78% 34%, #ff9c7e 0, rgba(255, 156, 126, 0.9) 22%, transparent 48%),
-    radial-gradient(circle at 34% 38%, #aebafa 0, rgba(151, 168, 249, 0.85) 26%, transparent 52%),
-    radial-gradient(circle at 55% 68%, #18dbdf 0, #00bdd9 26%, transparent 55%),
-    linear-gradient(145deg, #b6c7ff 0%, #f3e99a 45%, #ff8a82 72%, #00d1dd 100%);
+  display: block;
+  flex: 0 0 auto;
 }
 
-.orb::before {
-  content: "";
+.planet-art {
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background:
-    radial-gradient(circle at 56% 48%, rgba(255,255,255,0.18), transparent 23%),
-    linear-gradient(135deg, rgba(255,255,255,0.16), transparent 46%, rgba(1, 98, 151, 0.08));
-  box-shadow: inset -20px -30px 55px rgba(4, 51, 80, 0.13);
+  width: 182%;
+  height: 182%;
+  left: -41%;
+  top: -41%;
+  max-width: none;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  -webkit-mask-image: radial-gradient(circle, #000 0 38%, transparent 52%);
+  mask-image: radial-gradient(circle, #000 0 38%, transparent 52%);
+  pointer-events: none;
+  user-select: none;
 }
 
-.orb--large {
+.planet--large {
   width: clamp(320px, 29vw, 400px);
-  aspect-ratio: 0.98;
-  box-shadow:
-    -52px 56px 64px rgba(0, 188, 228, 0.54),
-    -13px 24px 29px rgba(0, 194, 223, 0.44),
-    0 0 23px rgba(224, 245, 255, 0.4);
+  aspect-ratio: 1;
 }
 
-.orb--small {
+.planet--small {
   width: clamp(67px, 5.5vw, 82px);
   aspect-ratio: 1;
-  box-shadow:
-    -9px 15px 15px rgba(0, 202, 232, 0.72),
-    0 2px 9px rgba(255, 255, 255, 0.44);
-}
-
-.orbit {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border: 1.35px solid rgba(255, 255, 255, 0.74);
-  border-radius: 50%;
-  transform-origin: center;
-}
-
-.orbit--one {
-  width: 129%;
-  height: 58%;
-  transform: translate(-50%, -50%) rotate(22deg);
-}
-
-.orbit--two {
-  width: 126%;
-  height: 55%;
-  transform: translate(-50%, -50%) rotate(-44deg);
-}
-
-.orbit--three {
-  width: 58%;
-  height: 128%;
-  transform: translate(-50%, -50%) rotate(-43deg);
-}
-
-.orbit--four {
-  width: 54%;
-  height: 126%;
-  transform: translate(-50%, -50%) rotate(39deg);
-}
-
-.orb--small .orbit {
-  border-width: 0.8px;
 }
 
 .status-pill {
@@ -349,7 +302,7 @@ body {
     top: 4%;
   }
 
-  .orb--large {
+  .planet--large {
     width: min(390px, 42vw);
   }
 }
@@ -415,7 +368,7 @@ body {
     top: 8%;
   }
 
-  .orb--large {
+  .planet--large {
     width: min(250px, 56vw);
   }
 

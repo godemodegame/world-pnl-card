@@ -1,11 +1,11 @@
-function Orb({ small = false }: { small?: boolean }) {
+function Planet({ small = false }: { small?: boolean }) {
   return (
-    <div className={small ? "orb orb--small" : "orb orb--large"} aria-hidden="true">
-      <span className="orbit orbit--one" />
-      <span className="orbit orbit--two" />
-      <span className="orbit orbit--three" />
-      <span className="orbit orbit--four" />
-    </div>
+    <span
+      className={small ? "planet planet--small" : "planet planet--large"}
+      aria-hidden="true"
+    >
+      <img className="planet-art" src="/world-planet.png" alt="" />
+    </span>
   );
 }
 
@@ -18,7 +18,7 @@ export default function Home() {
 
         <section className="content-column">
           <header className="brand" aria-label="World">
-            <Orb small />
+            <Planet small />
             <span className="brand-name">world</span>
           </header>
 
@@ -41,7 +41,7 @@ export default function Home() {
         </section>
 
         <section className="visual-column" aria-hidden="true">
-          <Orb />
+          <Planet />
         </section>
 
         <div className="status-pill" aria-label="Outcome: won">
