@@ -34,8 +34,8 @@ body {
 .page-shell {
   min-height: 100svh;
   display: grid;
-  place-items: center;
-  padding: clamp(28px, 7.4vw, 114px) clamp(20px, 5.35vw, 82px);
+  place-items: start center;
+  padding: clamp(28px, 7.35vw, 113px) clamp(20px, 5.35vw, 82px);
   overflow: hidden;
   background:
     radial-gradient(circle at 73% 76%, rgba(31, 92, 137, 0.09), transparent 30%),
@@ -106,6 +106,7 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
+  transform: translateX(-14px);
 }
 
 .brand-name {
@@ -116,7 +117,7 @@ body {
 }
 
 .result-block {
-  margin-top: clamp(96px, 9.1vw, 135px);
+  margin-top: clamp(76px, 6.4vw, 98px);
 }
 
 .eyebrow {
@@ -159,7 +160,7 @@ body {
 }
 
 .muted {
-  margin: 23px 0 0;
+  margin: 18px 0 0;
   color: #a2a2a6;
   font-size: clamp(23px, 1.8vw, 29px);
   letter-spacing: 0.015em;
@@ -167,7 +168,7 @@ body {
 
 .divider {
   height: 1px;
-  margin-top: 38px;
+  margin-top: 34px;
   background: linear-gradient(90deg, rgba(196, 200, 204, 0.58), rgba(196, 200, 204, 0.28));
 }
 
@@ -178,7 +179,7 @@ body {
 .pnl-value {
   margin: 16px 0 20px;
   color: var(--green);
-  font-size: clamp(44px, 4vw, 63px);
+  font-size: clamp(44px, 4.2vw, 65px);
   font-weight: 610;
   line-height: 1;
   letter-spacing: 0.035em;
@@ -193,7 +194,7 @@ body {
 .roi {
   margin: 0;
   color: var(--green);
-  font-size: clamp(23px, 1.75vw, 29px);
+  font-size: clamp(23px, 1.82vw, 29px);
   letter-spacing: 0.025em;
 }
 
@@ -208,8 +209,8 @@ body {
   position: absolute;
   width: 48%;
   height: 74%;
-  top: 7%;
-  right: 4.6%;
+  top: 4.8%;
+  right: 3.35%;
   display: grid;
   place-items: center;
 }
@@ -239,7 +240,7 @@ body {
 }
 
 .orb--large {
-  width: clamp(320px, 29vw, 416px);
+  width: clamp(320px, 29vw, 400px);
   aspect-ratio: 0.98;
   box-shadow:
     -52px 56px 64px rgba(0, 188, 228, 0.54),
@@ -450,24 +451,4 @@ body {
   .pnl-value span {
     font-size: 0.58em;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .orb--large {
-    animation: orb-float 6s ease-in-out infinite;
-  }
-
-  .status-dot {
-    animation: dot-pulse 2.5s ease-in-out infinite;
-  }
-}
-
-@keyframes orb-float {
-  0%, 100% { transform: rotate(9deg) translateY(0); }
-  50% { transform: rotate(11deg) translateY(-8px); }
-}
-
-@keyframes dot-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.55; }
 }
