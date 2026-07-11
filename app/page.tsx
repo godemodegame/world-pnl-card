@@ -12,7 +12,7 @@ function Planet({ small = false }: { small?: boolean }) {
 export default function Home() {
   return (
     <main className="page-shell">
-      <article className="result-card" aria-label="World market result card">
+      <article className="result-card result-card--negative" aria-label="World negative market result card">
         <div className="grid-field" aria-hidden="true" />
         <div className="corner-glow" aria-hidden="true" />
 
@@ -25,10 +25,8 @@ export default function Home() {
           <div className="result-block">
             <p className="eyebrow">Result</p>
             <div className="result-line">
-              <strong>Yes</strong>
-              <span className="check" aria-label="Resolved successfully">
-                <img className="check-icon" src="/checkmark-badge.png" alt="" />
-              </span>
+              <strong>No</strong>
+              <span className="check check--negative" aria-label="Resolved negatively">×</span>
             </div>
             <p className="muted">Market resolved</p>
           </div>
@@ -37,8 +35,8 @@ export default function Home() {
 
           <div className="pnl-block">
             <p className="eyebrow">Your PNL</p>
-            <p className="pnl-value">+127.45 <span>USDC</span></p>
-            <p className="roi"><span>ROI</span> +28.34%</p>
+            <p className="pnl-value">-127.45 <span>USDC</span></p>
+            <p className="roi"><span>ROI</span> -28.34%</p>
           </div>
         </section>
 
@@ -46,9 +44,9 @@ export default function Home() {
           <Planet />
         </section>
 
-        <div className="status-pill" aria-label="Outcome: won">
+        <div className="status-pill" aria-label="Outcome: lost">
           <span className="status-dot" />
-          <span>Won</span>
+          <span>Lost</span>
         </div>
       </article>
     </main>

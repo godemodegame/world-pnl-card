@@ -43,6 +43,8 @@ body {
 }
 
 .result-card {
+  --accent: var(--green);
+  --accent-rgb: 62, 234, 144;
   position: relative;
   width: min(100%, 1374px);
   aspect-ratio: 1.832 / 1;
@@ -58,6 +60,11 @@ body {
   box-shadow:
     inset 0 0 70px rgba(0, 6, 10, 0.72),
     0 36px 80px rgba(0, 0, 0, 0.66);
+}
+
+.result-card--negative {
+  --accent: #ff6169;
+  --accent-rgb: 255, 97, 105;
 }
 
 .result-card::before {
@@ -136,13 +143,13 @@ body {
 }
 
 .result-line strong {
-  color: var(--green);
+  color: var(--accent);
   font-size: clamp(62px, 5.1vw, 80px);
   font-weight: 660;
   line-height: 1;
   letter-spacing: 0.015em;
   text-transform: uppercase;
-  text-shadow: 0 0 28px rgba(62, 234, 144, 0.08);
+  text-shadow: 0 0 28px rgba(var(--accent-rgb), 0.08);
 }
 
 .check {
@@ -151,6 +158,16 @@ body {
   display: grid;
   place-items: center;
   flex: 0 0 auto;
+}
+
+.check--negative {
+  border-radius: 50%;
+  background: rgba(78, 20, 25, 0.72);
+  color: var(--accent);
+  font-size: 52px;
+  font-weight: 270;
+  line-height: 1;
+  padding-bottom: 5px;
 }
 
 .check-icon {
@@ -179,7 +196,7 @@ body {
 
 .pnl-value {
   margin: 16px 0 20px;
-  color: var(--green);
+  color: var(--accent);
   font-size: clamp(44px, 4.2vw, 65px);
   font-weight: 610;
   line-height: 1;
@@ -194,7 +211,7 @@ body {
 
 .roi {
   margin: 0;
-  color: var(--green);
+  color: var(--accent);
   font-size: clamp(23px, 1.82vw, 29px);
   letter-spacing: 0.025em;
 }
@@ -245,6 +262,21 @@ body {
     drop-shadow(0 0 9px rgba(177, 243, 255, 0.2));
 }
 
+.result-card--negative .planet--large .planet-art {
+  filter:
+    drop-shadow(-31px 38px 49px rgba(255, 62, 74, 0.46))
+    drop-shadow(-8px 15px 18px rgba(255, 92, 101, 0.28));
+}
+
+.result-card--negative .visual-column {
+  top: 6%;
+  right: 3.9%;
+}
+
+.result-card--negative .planet--large {
+  width: clamp(320px, 29.5vw, 410px);
+}
+
 .planet--small {
   width: clamp(67px, 5.5vw, 82px);
   aspect-ratio: 1;
@@ -267,10 +299,10 @@ body {
   align-items: center;
   justify-content: center;
   gap: 21px;
-  border: 1.5px solid rgba(42, 229, 132, 0.88);
+  border: 1.5px solid rgba(var(--accent-rgb), 0.88);
   border-radius: 999px;
   background: rgba(0, 24, 20, 0.5);
-  color: var(--green);
+  color: var(--accent);
   font-size: 31px;
   font-weight: 620;
   letter-spacing: 0.035em;
@@ -278,12 +310,19 @@ body {
   box-shadow: inset 0 0 24px rgba(4, 57, 41, 0.35);
 }
 
+.result-card--negative .status-pill {
+  right: 9.4%;
+  min-width: 186px;
+  background: rgba(35, 4, 8, 0.55);
+  box-shadow: inset 0 0 24px rgba(84, 12, 20, 0.32);
+}
+
 .status-dot {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 10px rgba(62, 234, 144, 0.65);
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.65);
 }
 
 @media (max-width: 1000px) {
