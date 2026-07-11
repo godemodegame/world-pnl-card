@@ -124,7 +124,7 @@ body {
 }
 
 .result-block {
-  margin-top: clamp(76px, 6.4vw, 98px);
+  margin-top: clamp(50px, 4.4vw, 68px);
 }
 
 .eyebrow {
@@ -177,10 +177,26 @@ body {
   object-fit: contain;
 }
 
+.market-title {
+  margin: clamp(20px, 1.9vw, 30px) 0 0;
+  color: var(--foreground);
+  font-size: clamp(25px, 2.05vw, 33px);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+}
+
+.market-sub {
+  margin: 8px 0 0;
+  color: #8f9096;
+  font-size: clamp(17px, 1.35vw, 22px);
+  letter-spacing: 0.01em;
+}
+
 .muted {
-  margin: 18px 0 0;
+  margin: 13px 0 0;
   color: #a2a2a6;
-  font-size: clamp(23px, 1.8vw, 29px);
+  font-size: clamp(19px, 1.5vw, 24px);
   letter-spacing: 0.015em;
 }
 
@@ -194,8 +210,20 @@ body {
   margin-top: 28px;
 }
 
+.pnl-block .eyebrow {
+  margin-bottom: 6px;
+}
+
+.pnl-row {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(22px, 2.3vw, 38px);
+  width: max-content;
+  max-width: 140%;
+}
+
 .pnl-value {
-  margin: 16px 0 20px;
+  margin: 2px 0 0;
   color: var(--accent);
   font-size: clamp(44px, 4.2vw, 65px);
   font-weight: 610;

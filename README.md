@@ -1,98 +1,143 @@
-# vinext-starter
+# World PnL Card
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Generate a branded **World** "PnL result card" PNG for any [World](https://app.world.org)
+prediction-market position — open or closed. The card is rendered by a small
+[vinext](https://github.com/cloudflare/vinext) app (`app/page.tsx` + `app/globals.css`)
+and screenshotted to a 1536×1024 @2x PNG.
+
+<p align="center">
+  <img src="docs/card-won.png" alt="World PnL card — winning position" width="49%" />
+  <img src="docs/card-lost.png" alt="World PnL card — losing position" width="49%" />
+</p>
+
+## Why this exists
+
+The World MCP connector exposes current holdings, trade tx-hashes, market
+metadata, and prices — but **not PnL**. A closed position's realized profit is
+never returned, and the closing trade often happens outside the connector. So
+PnL is **reconstructed from the wallet's on-chain SPL balance deltas** on Solana
+(cost basis in, proceeds out, remaining shares), then handed to the card
+renderer. Two small Node scripts do the work:
+
+| Script | Job |
+|---|---|
+| `scripts/reconstruct-pnl.mjs` | Pure on-chain math — reads Solana SPL balance deltas over a wallet's history and emits per-market cost basis, proceeds, remaining shares, PnL, and ROI. |
+| `scripts/render-card.mjs` | Boots the vinext app, opens the card with the position encoded in `?data=`, waits for fonts + artwork, and screenshots the PNG. |
 
 ## Prerequisites
 
-- Node.js `>=22.13.0`
+- **Node.js ≥ 22.13.0** — required by vinext (the dev server / renderer).
+  `reconstruct-pnl.mjs` alone runs on Node ≥ 18, but `render-card.mjs` boots the
+  dev server, which needs 22.
+- A Solana RPC endpoint. The public `https://api.mainnet-beta.solana.com` is the
+  default; set `SOLANA_RPC_URL` to a private RPC (Helius/Triton) if it rate-limits.
 
-## Quick Start
+## Installation
 
 ```bash
+git clone https://github.com/godemodegame/world-pnl-card.git
+cd world-pnl-card
 npm install
+npx playwright install chromium   # headless browser used by render-card.mjs
+```
+
+Verify the app builds and renders a sample card:
+
+```bash
 npm run dev
-npm run build
+# open http://localhost:<port>/  — shows a sample card (Spain beats Belgium)
 ```
 
-This starter does not use `wrangler.jsonc`.
+The page is data-driven: `http://localhost:<port>/?data=<url-encoded JSON>`
+renders any position. With no `data` param it falls back to a built-in sample.
 
-## Included Shape
+## Rendering a card manually
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+```bash
+# 1. Reconstruct on-chain flows for a wallet (caches to a JSON file)
+node scripts/reconstruct-pnl.mjs <wallet-address> --json outputs/.pnl-flows.json
 
-## Workspace Auth Headers
+# 2. Build a markets.json mapping each outcome mint -> market title/side/result
+#    (see .claude/skills/world-pnl-card/SKILL.md for the exact shape)
 
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
+# 3. Emit card-ready position data (reuses the cached flows)
+node scripts/reconstruct-pnl.mjs <wallet-address> \
+  --json outputs/.pnl-flows.json --markets markets.json
 
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+# 4. Render the chosen position to a PNG
+node scripts/render-card.mjs --data-file chosen.json
+# -> outputs/world-pnl-card-<slug>.png
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+You can also render straight from inline JSON without the reconstruct step:
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+```bash
+node scripts/render-card.mjs --data '{
+  "won": true, "outcomeWord": "Yes",
+  "marketTitle": "Spain beats Belgium",
+  "marketSubtitle": "World Cup 2026 · Jul 10, 2026",
+  "statusLine": "Market resolved",
+  "pnl": 127.45, "currency": "USDC", "roiPercent": 28.34,
+  "statusLabel": "Won"
+}'
+```
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+## Card data model
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+`app/page.tsx` reads a single URL-encoded JSON object from `?data=`:
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+| Field | Meaning |
+|---|---|
+| `won` | Drives the accent — green ✓ / red ×, badge, and pill |
+| `outcomeWord` | Big RESULT word (`"Yes"` / `"No"` for closed; held side for open) |
+| `marketTitle` / `marketSubtitle` | Market name + date under the result |
+| `statusLine` | `"Market resolved"` (closed) / `"Position open"` (open) |
+| `pnl` / `currency` | Signed profit, e.g. `127.45` / `"USDC"` |
+| `roiPercent` | Signed ROI, e.g. `28.34` |
+| `statusLabel` | `"Won"` / `"Lost"` / `"Open"` pill |
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+## Using the Claude Code skill
 
-## Useful Commands
+This repo ships a Claude Code skill at `.claude/skills/world-pnl-card/` that runs
+the whole flow end-to-end from the [World MCP connector](https://claude.ai):
+resolve the wallet → reconstruct flows → map mints to markets → price open
+positions → render → deliver the PNG in chat. Ask Claude to *"make a PnL card for
+my latest World bet"* and it drives the scripts above. See
+[`SKILL.md`](.claude/skills/world-pnl-card/SKILL.md) for the full procedure.
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+## Environment variables
 
-## Learn More
+| Var | Used by | Default |
+|---|---|---|
+| `SOLANA_RPC_URL` | `reconstruct-pnl.mjs` | `https://api.mainnet-beta.solana.com` |
+| `RENDER_BASE_URL` | `render-card.mjs` | *(unset)* — reuse an already-running dev server instead of spawning one (fast iteration) |
+| `VINEXT_NODE_BIN` | `render-card.mjs` | *(unset)* — point at a Node ≥22 `bin` dir if auto-detection fails |
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+## Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the local vinext dev server |
+| `npm run build` | Build the vinext output |
+| `npm test` | Build and verify the rendered card HTML |
+| `npm run lint` | Lint with ESLint |
+
+## Project layout
+
+```
+app/                       vinext app — the card UI
+  page.tsx                 data-driven card (reads ?data=)
+  globals.css              card styling
+scripts/
+  reconstruct-pnl.mjs      on-chain PnL reconstruction (Solana SPL deltas)
+  render-card.mjs          Playwright screenshot of the live card
+public/                    planet artwork, checkmark badge, favicon
+.claude/skills/world-pnl-card/  Claude Code skill orchestrating the flow
+docs/                      README preview images
+```
+
+## Notes
+
+- USDC and CASH are both treated as $1. Buys spend USDC; redeems pay CASH.
+- SOL rent/fees (~0.002 SOL) are ignored — negligible vs. position size.
+- World positions are Solana SPL outcome tokens; the reconstruction is Solana-only.
