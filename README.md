@@ -1,65 +1,63 @@
 # World PnL Card
 
-A [Claude Code](https://claude.com/claude-code) skill that generates a branded
-**World** "PnL result card" PNG for any [World](https://app.world.org)
-prediction-market position — open or closed. Ask Claude *"make a PnL card for my
-latest World bet"* and it pulls the position from the World MCP connector,
-reconstructs realized/unrealized PnL from on-chain Solana data, and renders the
-card.
+Generate a branded **World** "PnL result card" PNG for any
+[World](https://app.world.org) prediction-market position — open or closed.
 
 <p align="center">
   <img src="docs/card-won.png" alt="World PnL card — winning position" width="49%" />
   <img src="docs/card-lost.png" alt="World PnL card — losing position" width="49%" />
 </p>
 
-## Prerequisites
+## Hosted MCP server (recommended)
 
-- **Node.js ≥ 22.13.0** — required by the card renderer.
-- **Claude Code** with the **World MCP connector** enabled.
+The card renderer runs as a **free, browserless MCP server** — no local install, no
+Playwright. It exposes one tool, `render_pnl_card`, that turns card data into a PNG.
 
-## Install
-
-Clone the repo and install its dependencies. The skill lives at
-`.claude/skills/world-pnl-card/` and Claude Code loads it automatically when you
-work inside the repo.
+**Live endpoint:** `https://world-pnl-card.vercel.app/api/mcp`
 
 ```bash
-git clone https://github.com/godemodegame/world-pnl-card.git
-cd world-pnl-card
-npm install
-npx playwright install chromium   # headless browser used to render the PNG
+claude mcp add --transport http world-pnl-card https://world-pnl-card.vercel.app/api/mcp
 ```
 
-That's it. Open the repo in Claude Code and the `world-pnl-card` skill is
-available.
+Then ask Claude to *"render a World PnL card — won, +6.52 USDC, +32.6% ROI, Spain
+beats Belgium."* Source, deploy steps, and a local **stdio** variant live in
+[`mcp-server/`](mcp-server/). See [`mcp-server/README.md`](mcp-server/README.md).
 
-To use the skill from any directory, symlink it into your global skills folder:
+How it stays browserless (so it hosts anywhere for free): the decorative chrome
+(gradients, glows, blur, 3D grid, planet, pill) is pre-baked into a background image
+per win/lose variant, and [satori](https://github.com/vercel/satori) draws only the
+dynamic text on top → [resvg](https://github.com/RazrFalcon/resvg) → PNG.
+
+## Building the card data (on-chain)
+
+The MCP tool renders from card fields — you supply the numbers. The World MCP
+connector does not expose PnL, so realized/unrealized PnL is reconstructed from the
+wallet's on-chain Solana SPL balance deltas:
 
 ```bash
-mkdir -p ~/.claude/skills
-ln -s "$(pwd)/.claude/skills/world-pnl-card" ~/.claude/skills/world-pnl-card
+node scripts/reconstruct-pnl.mjs <wallet> --json outputs/.pnl-flows.json
+# map the printed candidateMints -> markets.json via the World MCP connector, then:
+node scripts/reconstruct-pnl.mjs <wallet> --json outputs/.pnl-flows.json --markets markets.json
 ```
 
-(The skill still shells out to this repo's scripts, so keep the clone in place.)
+Pass 2 emits `positions[]`, each already shaped as the card data model
+(`{ won, outcomeWord, marketTitle, marketSubtitle, statusLine, pnl, currency,
+roiPercent, statusLabel }`) — feed one to `render_pnl_card`.
 
-## Use
+## Local card app (optional)
 
-In Claude Code, just ask:
-
-> make a PnL card for my latest World bet
-
-Claude resolves your wallet, reconstructs the flows, maps markets, renders the
-PNG, and shows it in chat. See
-[`SKILL.md`](.claude/skills/world-pnl-card/SKILL.md) for the full procedure and
-the two scripts it drives (`scripts/reconstruct-pnl.mjs`, `scripts/render-card.mjs`).
+The repo also contains the original [vinext](https://www.npmjs.com/package/vinext)
+card app (`app/`, rendered surface for the design) and a Playwright renderer
+(`scripts/render-card.mjs`). These need **Node ≥ 22.13.0** and
+`npx playwright install chromium`. The hosted MCP server supersedes them for
+rendering; they remain as the design source that `scripts/bake-card.mjs` bakes from.
 
 ## Environment variables (optional)
 
 | Var | Purpose | Default |
 |---|---|---|
 | `SOLANA_RPC_URL` | Private Solana RPC if the public one rate-limits | `https://api.mainnet-beta.solana.com` |
-| `RENDER_BASE_URL` | Reuse an already-running dev server for faster renders | *(unset)* |
-| `VINEXT_NODE_BIN` | Point at a Node ≥22 `bin` dir if auto-detection fails | *(unset)* |
+| `MCP_TOKEN` | If set on the deployed MCP server, require `Authorization: Bearer <token>` | *(unset)* |
 
 ## Notes
 

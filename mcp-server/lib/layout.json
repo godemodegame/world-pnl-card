@@ -1,0 +1,517 @@
+{
+  "canvas": {
+    "w": 3072,
+    "h": 2048
+  },
+  "deviceScaleFactor": 2,
+  "variants": {
+    "won": {
+      ".result-line": {
+        "rect": {
+          "x": 378.34375,
+          "y": 756.15625,
+          "w": 972.6875,
+          "h": 156.6875
+        },
+        "style": {
+          "fontSize": 32,
+          "fontWeight": "400",
+          "color": "rgb(246, 247, 248)",
+          "letterSpacing": 0,
+          "lineHeight": 48,
+          "textTransform": "none",
+          "columnGap": 92.16,
+          "marginRight": 0
+        }
+      },
+      ".result-line strong": {
+        "rect": {
+          "x": 378.34375,
+          "y": 756.15625,
+          "w": 304.53125,
+          "h": 156.6875
+        },
+        "style": {
+          "fontSize": 156.672,
+          "fontWeight": "660",
+          "color": "rgb(62, 234, 144)",
+          "letterSpacing": 2.35008,
+          "lineHeight": 156.672,
+          "textTransform": "uppercase",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".check": {
+        "rect": {
+          "x": 775.03125,
+          "y": 766.5,
+          "w": 136,
+          "h": 136
+        },
+        "style": {
+          "fontSize": 32,
+          "fontWeight": "400",
+          "color": "rgb(246, 247, 248)",
+          "letterSpacing": 0,
+          "lineHeight": 48,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".market-title": {
+        "rect": {
+          "x": 378.34375,
+          "y": 971.1875,
+          "w": 972.6875,
+          "h": 71.78125
+        },
+        "style": {
+          "fontSize": 62.976,
+          "fontWeight": "600",
+          "color": "rgb(246, 247, 248)",
+          "letterSpacing": -0.62976,
+          "lineHeight": 71.7926,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".market-sub": {
+        "rect": {
+          "x": 378.34375,
+          "y": 1058.96875,
+          "w": 972.6875,
+          "h": 62.1875
+        },
+        "style": {
+          "fontSize": 41.472,
+          "fontWeight": "400",
+          "color": "rgb(143, 144, 150)",
+          "letterSpacing": 0.41472,
+          "lineHeight": 62.208,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".muted": {
+        "rect": {
+          "x": 378.34375,
+          "y": 1147.15625,
+          "w": 972.6875,
+          "h": 69.125
+        },
+        "style": {
+          "fontSize": 46.08,
+          "fontWeight": "400",
+          "color": "rgb(162, 162, 166)",
+          "letterSpacing": 0.6912,
+          "lineHeight": 69.12,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".pnl-block .eyebrow": {
+        "rect": {
+          "x": 378.34375,
+          "y": 1342.28125,
+          "w": 972.6875,
+          "h": 66.78125
+        },
+        "style": {
+          "fontSize": 44.544,
+          "fontWeight": "520",
+          "color": "rgb(171, 173, 179)",
+          "letterSpacing": 5.79072,
+          "lineHeight": 66.816,
+          "textTransform": "uppercase",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".pnl-row": {
+        "rect": {
+          "x": 378.34375,
+          "y": 1421.0625,
+          "w": 1114.40625,
+          "h": 137.84375
+        },
+        "style": {
+          "fontSize": 32,
+          "fontWeight": "400",
+          "color": "rgb(246, 247, 248)",
+          "letterSpacing": 0,
+          "lineHeight": 48,
+          "textTransform": "none",
+          "columnGap": 70.656,
+          "marginRight": 0
+        }
+      },
+      ".pnl-value": {
+        "rect": {
+          "x": 378.34375,
+          "y": 1425.0625,
+          "w": 675.5,
+          "h": 129.03125
+        },
+        "style": {
+          "fontSize": 129.024,
+          "fontWeight": "610",
+          "color": "rgb(62, 234, 144)",
+          "letterSpacing": 4.51584,
+          "lineHeight": 129.024,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".pnl-value span": {
+        "rect": {
+          "x": 784.03125,
+          "y": 1445.0625,
+          "w": 269.8125,
+          "h": 116
+        },
+        "style": {
+          "fontSize": 89.0266,
+          "fontWeight": "610",
+          "color": "rgb(62, 234, 144)",
+          "letterSpacing": 4.89646,
+          "lineHeight": 89.0266,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".roi": {
+        "rect": {
+          "x": 1124.46875,
+          "y": 1475.0625,
+          "w": 368.28125,
+          "h": 83.84375
+        },
+        "style": {
+          "fontSize": 55.9104,
+          "fontWeight": "400",
+          "color": "rgb(62, 234, 144)",
+          "letterSpacing": 1.39776,
+          "lineHeight": 83.8656,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".roi span": {
+        "rect": {
+          "x": 1124.46875,
+          "y": 1475.0625,
+          "w": 107.21875,
+          "h": 83.84375
+        },
+        "style": {
+          "fontSize": 55.9104,
+          "fontWeight": "400",
+          "color": "rgb(155, 155, 160)",
+          "letterSpacing": 4.47284,
+          "lineHeight": 83.8656,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 48
+        }
+      },
+      ".status-pill": {
+        "rect": {
+          "x": 2305,
+          "y": 1419.21875,
+          "w": 364,
+          "h": 156
+        },
+        "style": {
+          "fontSize": 62,
+          "fontWeight": "620",
+          "color": "rgb(62, 234, 144)",
+          "letterSpacing": 2.17,
+          "lineHeight": 93,
+          "textTransform": "uppercase",
+          "columnGap": 42,
+          "marginRight": 0
+        }
+      },
+      ".status-pill span:last-child": {
+        "rect": {
+          "x": 2444,
+          "y": 1450.71875,
+          "w": 160,
+          "h": 93
+        },
+        "style": {
+          "fontSize": 62,
+          "fontWeight": "620",
+          "color": "rgb(62, 234, 144)",
+          "letterSpacing": 2.17,
+          "lineHeight": 93,
+          "textTransform": "uppercase",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      }
+    },
+    "lost": {
+      ".result-line": {
+        "rect": {
+          "x": 378.34375,
+          "y": 756.15625,
+          "w": 972.6875,
+          "h": 156.6875
+        },
+        "style": {
+          "fontSize": 32,
+          "fontWeight": "400",
+          "color": "rgb(246, 247, 248)",
+          "letterSpacing": 0,
+          "lineHeight": 48,
+          "textTransform": "none",
+          "columnGap": 92.16,
+          "marginRight": 0
+        }
+      },
+      ".result-line strong": {
+        "rect": {
+          "x": 378.34375,
+          "y": 756.15625,
+          "w": 240.3125,
+          "h": 156.6875
+        },
+        "style": {
+          "fontSize": 156.672,
+          "fontWeight": "660",
+          "color": "rgb(255, 97, 105)",
+          "letterSpacing": 2.35008,
+          "lineHeight": 156.672,
+          "textTransform": "uppercase",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".check": {
+        "rect": {
+          "x": 710.8125,
+          "y": 766.5,
+          "w": 136,
+          "h": 136
+        },
+        "style": {
+          "fontSize": 104,
+          "fontWeight": "270",
+          "color": "rgb(255, 97, 105)",
+          "letterSpacing": 0,
+          "lineHeight": 104,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".market-title": {
+        "rect": {
+          "x": 378.34375,
+          "y": 971.1875,
+          "w": 972.6875,
+          "h": 71.78125
+        },
+        "style": {
+          "fontSize": 62.976,
+          "fontWeight": "600",
+          "color": "rgb(246, 247, 248)",
+          "letterSpacing": -0.62976,
+          "lineHeight": 71.7926,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".market-sub": {
+        "rect": {
+          "x": 378.34375,
+          "y": 1058.96875,
+          "w": 972.6875,
+          "h": 62.1875
+        },
+        "style": {
+          "fontSize": 41.472,
+          "fontWeight": "400",
+          "color": "rgb(143, 144, 150)",
+          "letterSpacing": 0.41472,
+          "lineHeight": 62.208,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".muted": {
+        "rect": {
+          "x": 378.34375,
+          "y": 1147.15625,
+          "w": 972.6875,
+          "h": 69.125
+        },
+        "style": {
+          "fontSize": 46.08,
+          "fontWeight": "400",
+          "color": "rgb(162, 162, 166)",
+          "letterSpacing": 0.6912,
+          "lineHeight": 69.12,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".pnl-block .eyebrow": {
+        "rect": {
+          "x": 378.34375,
+          "y": 1342.28125,
+          "w": 972.6875,
+          "h": 66.78125
+        },
+        "style": {
+          "fontSize": 44.544,
+          "fontWeight": "520",
+          "color": "rgb(171, 173, 179)",
+          "letterSpacing": 5.79072,
+          "lineHeight": 66.816,
+          "textTransform": "uppercase",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".pnl-row": {
+        "rect": {
+          "x": 378.34375,
+          "y": 1421.0625,
+          "w": 1099.15625,
+          "h": 137.84375
+        },
+        "style": {
+          "fontSize": 32,
+          "fontWeight": "400",
+          "color": "rgb(246, 247, 248)",
+          "letterSpacing": 0,
+          "lineHeight": 48,
+          "textTransform": "none",
+          "columnGap": 70.656,
+          "marginRight": 0
+        }
+      },
+      ".pnl-value": {
+        "rect": {
+          "x": 378.34375,
+          "y": 1425.0625,
+          "w": 666.25,
+          "h": 129.03125
+        },
+        "style": {
+          "fontSize": 129.024,
+          "fontWeight": "610",
+          "color": "rgb(255, 97, 105)",
+          "letterSpacing": 4.51584,
+          "lineHeight": 129.024,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".pnl-value span": {
+        "rect": {
+          "x": 774.78125,
+          "y": 1445.0625,
+          "w": 269.8125,
+          "h": 116
+        },
+        "style": {
+          "fontSize": 89.0266,
+          "fontWeight": "610",
+          "color": "rgb(255, 97, 105)",
+          "letterSpacing": 4.89646,
+          "lineHeight": 89.0266,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".roi": {
+        "rect": {
+          "x": 1115.21875,
+          "y": 1475.0625,
+          "w": 362.28125,
+          "h": 83.84375
+        },
+        "style": {
+          "fontSize": 55.9104,
+          "fontWeight": "400",
+          "color": "rgb(255, 97, 105)",
+          "letterSpacing": 1.39776,
+          "lineHeight": 83.8656,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      },
+      ".roi span": {
+        "rect": {
+          "x": 1115.21875,
+          "y": 1475.0625,
+          "w": 107.21875,
+          "h": 83.84375
+        },
+        "style": {
+          "fontSize": 55.9104,
+          "fontWeight": "400",
+          "color": "rgb(155, 155, 160)",
+          "letterSpacing": 4.47284,
+          "lineHeight": 83.8656,
+          "textTransform": "none",
+          "columnGap": 0,
+          "marginRight": 48
+        }
+      },
+      ".status-pill": {
+        "rect": {
+          "x": 2276.46875,
+          "y": 1419.21875,
+          "w": 372,
+          "h": 156
+        },
+        "style": {
+          "fontSize": 62,
+          "fontWeight": "620",
+          "color": "rgb(255, 97, 105)",
+          "letterSpacing": 2.17,
+          "lineHeight": 93,
+          "textTransform": "uppercase",
+          "columnGap": 42,
+          "marginRight": 0
+        }
+      },
+      ".status-pill span:last-child": {
+        "rect": {
+          "x": 2416.875,
+          "y": 1450.71875,
+          "w": 165.1875,
+          "h": 93
+        },
+        "style": {
+          "fontSize": 62,
+          "fontWeight": "620",
+          "color": "rgb(255, 97, 105)",
+          "letterSpacing": 2.17,
+          "lineHeight": 93,
+          "textTransform": "uppercase",
+          "columnGap": 0,
+          "marginRight": 0
+        }
+      }
+    }
+  }
+}
